@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio & Registration</title>
+    <style>
+        /* --- 1. CSS (DESIGN) --- */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #222;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin: 0 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        nav button:hover { color: #ffae00; }
+
+        /* Page Sections */
+        .page {
+            display: none; /* Hidden by default */
+            padding: 40px 20px;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+
+        /* Home Page */
+        #home {
+            display: block; /* Visible at start */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h1 { font-size: 3rem; margin: 0; }
+        
+        /* Gallery */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .gallery-container img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .gallery-container img:hover { transform: scale(1.03); }
+
+        /* Form Container (Shared Style) */
+        .form-box {
+            background: white;
+            max-width: 450px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        /* Form Elements */
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button.submit-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button.submit-btn:hover { background-color: #218838; }
+
+        /* --- YOUR ERROR STYLES --- */
+        .error { color: red; font-size: 13px; margin-top: -5px; display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- --- 2. HTML (CONTENT) --- -->
+
+    <!-- Navigation -->
+    <nav>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('gallery')">Gallery</button>
+        <button onclick="showPage('register')">Register</button> <!-- New Button -->
+        <button onclick="showPage('payment')">Payment</button>
+        <button onclick="showPage('contact')">Contact</button>
+    </nav>
+
+    <!-- PAGE 1: HOME -->
+    <div id="home" class="page">
+        <h1>LensMaster Photography</h1>
+        <p>Capturing moments, creating memories.</p>
+    </div>
+
+    <!-- PAGE 2: GALLERY -->
+    <div id="gallery" class="page">
+        <h2>My Portfolio</h2>
+        <div class="gallery-container">
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500">
+            <img src="data:image/jpeg;base64,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">
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=500">
+            <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=500">
+            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500">
+            <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500">
+        </div>
+    </div>
+
+    <!-- PAGE 3: REGISTER (YOUR NEW CODE) -->
+    <div id="register" class="page">
+        <h2>Member Registration</h2>
+        <div class="form-box">
+            <form id="myForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                <span id="nameError" class="error"></span>
+             
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <span id="emailError" class="error"></span>
+             
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                <span id="passwordError" class="error"></span>
+             
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+                <span id="ageError" class="error"></span>
+             
+                <button type="button" class="submit-btn" onclick="validateForm()">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PAGE 4: PAYMENT -->
+    <div id="payment" class="page">
+        <h2>Payment Gateway</h2>
+        <div class="form-box">
+            <p><strong>Total: $200.00</strong></p>
+            <label>Card Number</label>
+            <input type="text" placeholder="0000 0000 0000 0000">
+            <div style="display:flex; gap:10px;">
+                <input type="text" placeholder="MM/YY">
+                <input type="text" placeholder="CVV">
+            </div>
+            <button class="submit-btn" onclick="alert('Payment Successful!')">Pay Now</button>
+        </div>
+    </div>
+
+    <!-- PAGE 5: CONTACT -->
+    <div id="contact" class="page">
+        <h2>Contact Me</h2>
+        <div class="form-box">
+            <label>Message</label>
+            <input type="text" placeholder="Type your message...">
+            <button class="submit-btn" onclick="alert('Message Sent!')">Send</button>
+        </div>
+    </div>
+
+    <!-- --- 3. JAVASCRIPT --- -->
+    <script>
+        // Navigation Logic
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.style.display = 'none');
+            
+            // Show selected page
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        // --- YOUR VALIDATION LOGIC ---
+        function validateForm() {
+            // Clear previous error messages
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("ageError").textContent = "";
+        
+            let isValid = true;
+        
+            // Name validation
+            const name = document.getElementById("name").value.trim();
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required.";
+                isValid = false;
+            }
+        
+            // Email validation
+            const email = document.getElementById("email").value.trim();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Email is required.";
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Invalid email format.";
+                isValid = false;
+            }
+        
+            // Password validation
+            const password = document.getElementById("password").value.trim();
+            if (password === "") {
+                document.getElementById("passwordError").textContent = "Password is required.";
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById("passwordError").textContent = "Password must be at least 6 characters long.";
+                isValid = false;
+            }
+        
+            // Age validation
+            const age = document.getElementById("age").value.trim();
+            if (age === "") {
+                document.getElementById("ageError").textContent = "Age is required.";
+                isValid = false;
+            } else if (isNaN(age) || age <= 0) {
+                document.getElementById("ageError").textContent = "Age must be a positive number.";
+                isValid = false;
+            }
+        
+            // If all validations pass
+            if (isValid) {
+                alert("Form submitted successfully! Redirecting to Lists.html...");
+                window.location.href = "Lists.html"; // Note: This file must exist in your folder
+            }
+        }
+    </script>
+
+</body>
+</html>
