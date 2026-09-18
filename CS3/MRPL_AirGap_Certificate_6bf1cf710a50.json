@@ -1,0 +1,13 @@
+{
+  "organization": "Mangalore Refinery and Petrochemicals Limited (MRPL)",
+  "system": "MRPL Sovereign Air-Gapped AI Workbench",
+  "session_id": "6bf1cf710a50",
+  "session_start_utc": "2026-09-14T17:33:15.464755+00:00",
+  "session_end_utc": "2026-09-14T18:27:41.465143+00:00",
+  "is_air_gapped": true,
+  "external_wan_bytes_transferred": 0,
+  "total_internal_tool_calls": 14,
+  "verification_statement": "This certifies that 100% of LLM inferences, RAG vector searches, database queries, and sandbox executions during this session executed strictly on-premises with zero outbound cloud or external WAN transmission.",
+  "sha256_audit_signature": "62c2efbbeae193c1a94a8eb5de1a146829a0d04e45ce69139f6f84e436e70661",
+  "certificate_path": "D:\\VS Code Projects\\SIH\\DRISHTI-MRPL\\outputs\\reports\\MRPL_AirGap_Certificate_6bf1cf710a50.json"
+}
