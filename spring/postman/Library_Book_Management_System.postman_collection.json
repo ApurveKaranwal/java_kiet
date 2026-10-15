@@ -1,0 +1,285 @@
+{
+  "info": {
+    "_postman_id": "c76a911e-7bfa-4c4f-9da8-1f63d0dfa001",
+    "name": "Library Book Management System API",
+    "description": "Postman Collection for testing Library Book Management System REST APIs built with Java Spring Boot.\nCovers all 5 core operations: Addition, Retrieval, Search, Deletion, and Update, plus error and validation testing.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Addition (Add New Book)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Designing Data-Intensive Applications\",\n  \"author\": \"Martin Kleppmann\",\n  \"isbn\": \"978-1449373320\",\n  \"genre\": \"System Design\",\n  \"publicationYear\": 2017,\n  \"price\": 59.99,\n  \"totalCopies\": 10,\n  \"availableCopies\": 10\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books"
+          ]
+        },
+        "description": "Adds a new book record to the relational database. Expects 201 Created and Location header."
+      },
+      "response": []
+    },
+    {
+      "name": "2a. Retrieval (Get All Books)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books"
+          ]
+        },
+        "description": "Retrieves the complete list of all books stored in the library."
+      },
+      "response": []
+    },
+    {
+      "name": "2b. Retrieval (Get Book by ID)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "1"
+          ]
+        },
+        "description": "Retrieves the book details for a specific book using its primary key ID."
+      },
+      "response": []
+    },
+    {
+      "name": "3a. Search (Search by Title)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/search?title=Clean Code",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "Clean Code"
+            }
+          ]
+        },
+        "description": "Performs case-insensitive search by book title."
+      },
+      "response": []
+    },
+    {
+      "name": "3b. Search (Search by Author)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/search?author=Joshua Bloch",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "author",
+              "value": "Joshua Bloch"
+            }
+          ]
+        },
+        "description": "Performs case-insensitive search by author name."
+      },
+      "response": []
+    },
+    {
+      "name": "3c. Search (Search by ISBN)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/search?isbn=978-0134685991",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "isbn",
+              "value": "978-0134685991"
+            }
+          ]
+        },
+        "description": "Searches for a book record matching the specified ISBN."
+      },
+      "response": []
+    },
+    {
+      "name": "3d. Search (Search by Keyword across fields)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/search?keyword=Algorithms",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "Algorithms"
+            }
+          ]
+        },
+        "description": "Free-text search querying across title, author, and ISBN fields."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Update (Update Book Details)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Clean Code: A Handbook of Agile Software Craftsmanship (Revised)\",\n  \"author\": \"Robert C. Martin\",\n  \"isbn\": \"978-0132350884\",\n  \"genre\": \"Software Craftsmanship\",\n  \"publicationYear\": 2008,\n  \"price\": 49.99,\n  \"totalCopies\": 15,\n  \"availableCopies\": 11\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "1"
+          ]
+        },
+        "description": "Updates details for an existing book by ID."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Deletion (Delete Book by ID)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "1"
+          ]
+        },
+        "description": "Deletes the book with the specified ID."
+      },
+      "response": []
+    },
+    {
+      "name": "6. Validation Test (Missing Required Fields)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"\",\n  \"author\": \"\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/books",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books"
+          ]
+        },
+        "description": "Verifies 400 Bad Request error response when required fields are missing."
+      },
+      "response": []
+    },
+    {
+      "name": "7. Error Test (Resource Not Found)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/books/99999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "books",
+            "99999"
+          ]
+        },
+        "description": "Verifies 404 Not Found error response for an invalid book ID."
+      },
+      "response": []
+    }
+  ]
+}
